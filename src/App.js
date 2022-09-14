@@ -1,25 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+import AddTask from './components/AddTaskForm'
+import Header from './components/Header'
+import Tasks from './components/Tasks'
 
-function App() {
+ const App = () => {
+  const [showAdd,setShowAdd] = useState(false)
+  const [MyTasks,setMyTasks] = useState(
+    [
+     {
+         id:1,
+         name:"Nikhil Mohite",
+         day:"Apr 2nd ",
+         reminder:true
+     },
+     {
+         id:2,
+         name:"Harish Nalavade",
+         day:"Apr 14th ",
+         reminder:true
+     },
+     {
+         id:3,
+         name:"Kunal Lotankar",
+         day:"May 12th ",
+         reminder:true
+     }
+   ]
+     )
+
+     const addTask =(task) => {
+      const id =Math.floor(Math.random() * 10000) + 1
+
+      const newTask ={ id, ...task}
+      setMyTasks([...MyTasks,newTask])
+     }
+
+     const deleteTask =(id) =>{
+        setMyTasks(MyTasks.filter(item => item.id !== id))
+     }
+
+     const toggleReminder =(id) => {
+       setMyTasks(MyTasks.map(item => 
+        item.id ===id ? {...item, reminder:!item.reminder} : item
+       ))
+     }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+       <Header title="BirthDay Tracker" onAdd={() => setShowAdd(!showAdd)} showAdd={showAdd}/>
+       {showAdd && <AddTask  onAdd={addTask}/>}
+       {MyTasks.length > 0 ? <Tasks  MyTasks={MyTasks} onDelete={deleteTask} onToggle={toggleReminder} />: (
+       ' No Birthday Remaining' 
+       )}
     </div>
-  );
+  )
+   
 }
-
-export default App;
+export  default App

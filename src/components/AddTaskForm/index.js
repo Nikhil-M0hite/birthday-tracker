@@ -26,7 +26,7 @@ import { useState } from "react"
        </div>
        <div className="form-control">
         <label>Day & Time</label>
-        <input type='date' value={day} onChange={(e) => setDay(e.target.value)} placeholder='add your birth date'/>
+        <input type='text' value={day} onChange={(e) => setDay(e.target.value)} placeholder='add your birth date'/>
        </div>
        <div className="form-control form-control-check">
         <label>set reminder</label>

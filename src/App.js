@@ -60,7 +60,7 @@ import Tasks from './components/Tasks'
     //  }
 
     const toggleReminder = (id) => {
-         setMyTasks(MyTasks.map(item => item.id === id ? {...item,reminder:!item.toggleReminder} : item))
+         setMyTasks(MyTasks.map((item) => item.id === id ? {...item, reminder:!item.reminder} : item))
     }
     //  const toggleReminder = async(id) => {
     //   const taskToggle = await fetchMyTask(id)
